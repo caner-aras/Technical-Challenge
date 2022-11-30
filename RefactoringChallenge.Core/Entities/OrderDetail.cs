@@ -1,6 +1,8 @@
-﻿namespace RefactoringChallenge.Core.Entities
+﻿using RefactoringChallenge.Core.Entities.Interfaces;
+
+namespace RefactoringChallenge.Core.Entities
 {
-    public partial class OrderDetail
+    public partial class OrderDetail : IEntity
     {
         public int OrderId { get; set; }
         public int ProductId { get; set; }

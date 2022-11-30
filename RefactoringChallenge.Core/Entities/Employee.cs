@@ -1,9 +1,10 @@
-﻿using System;
+﻿using RefactoringChallenge.Core.Entities.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace RefactoringChallenge.Core.Entities
 {
-    public partial class Employee
+    public partial class Employee : IEntity
     {
         public Employee()
         {

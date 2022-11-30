@@ -1,14 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RefactoringChallenge.Core.Entites.Interfaces;
+﻿using Mapster;
+using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
 using RefactoringChallenge.Core.Entities;
+using RefactoringChallenge.Core.Entities.Interfaces;
 using RefactoringChallenge.Core.Models.Interfaces;
+using RefactoringChallenge.Core.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Mapster;
-using RefactoringChallenge.Core.Repositories.Interfaces;
 
 namespace RefactoringChallenge.Core.Repositories
 {

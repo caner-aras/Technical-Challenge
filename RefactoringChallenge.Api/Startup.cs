@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RefactoringChallenge.Core.Entities;
+using RefactoringChallenge.Core.Models.Exceptions;
+using RefactoringChallenge.Core.Repositories.Interfaces;
+using RefactoringChallenge.Core.Services;
+using RefactoringChallenge.Core.Services.Interfaces;
+using RefactoringChallenge.Filters;
 using RefactoringChallenge.Middlewares;
 
 namespace RefactoringChallenge
@@ -26,9 +32,24 @@ namespace RefactoringChallenge
             services.AddDbContext<NorthwindDbContext>(options => options.UseInMemoryDatabase("Technical-Challenge"));
 
             services.AddSingleton(TypeAdapterConfig.GlobalSettings);
-            services.AddScoped<IMapper, ServiceMapper>();
 
-            services.AddControllers();
+            services.AddScoped<IMapper, ServiceMapper>();
+            services.AddScoped(typeof(IRepository<,>), typeof(RefactoringChallenge.Core.Repositories.Repository<,>));
+            services.AddScoped<IOrderService, OrderService>();
+            services
+                .AddControllers(options =>
+                {
+                    options.Filters.Add<ValidationFiller>();
+                })
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    options.SuppressModelStateInvalidFilter = true;
+                })
+                .AddFluentValidation(options =>
+                {
+                    options.RegisterValidatorsFromAssemblyContaining<AppException>();
+                    options.ImplicitlyValidateChildProperties = true;
+                });
 
             services.AddSwaggerGen();
         }

@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using RefactoringChallenge.Core.Entities.Interfaces;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RefactoringChallenge.Core.Entities
 {
-    public partial class Category
+    public partial class Category : IEntity
     {
         public Category()
         {

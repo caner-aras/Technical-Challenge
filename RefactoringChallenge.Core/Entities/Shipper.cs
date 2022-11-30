@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using RefactoringChallenge.Core.Entities.Interfaces;
+using System.Collections.Generic;
 
 namespace RefactoringChallenge.Core.Entities
 {
-    public partial class Shipper
+    public partial class Shipper : IEntity
     {
         public Shipper()
         {

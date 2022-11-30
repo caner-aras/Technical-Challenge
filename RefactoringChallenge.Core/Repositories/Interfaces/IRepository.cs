@@ -1,17 +1,17 @@
-﻿using RefactoringChallenge.Core.Entites.Interfaces;
+﻿using RefactoringChallenge.Core.Entities.Interfaces;
 using RefactoringChallenge.Core.Models.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace RefactoringChallenge.Core.Repositories.Interfaces
 {
     public interface IRepository<TEntity, TDTO>
-       where TEntity : class, IEntity
-       where TDTO : class, IDTO
+        where TEntity : class, IEntity
+        where TDTO : class, IDTO
     {
         IQueryable<TEntity> AsQueryable(bool readOnly = true);
         Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate);
