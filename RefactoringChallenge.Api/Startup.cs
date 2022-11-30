@@ -30,6 +30,10 @@ namespace RefactoringChallenge
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<NorthwindDbContext>(options => options.UseInMemoryDatabase("Technical-Challenge"));
+            
+            // HACK:I could have used SQL Server
+
+            //services.AddDbContext<NorthwindDbContext>(options => options.UseSqlServer("name=DefaultConnection"));
 
             services.AddSingleton(TypeAdapterConfig.GlobalSettings);
 
