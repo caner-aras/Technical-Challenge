@@ -17,7 +17,7 @@ namespace RefactoringChallenge.Core.Models.Requests
         public string ShipRegion { get; set; }
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
-        public IEnumerable<OrderDetailRequest> OrderDetails { get; set; }
+        public List<OrderDetailRequest> OrderDetails { get; set; }
     }
 
     public class CreateOrderRequestValidator : AbstractValidator<CreateOrderRequest>
