@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RefactoringChallenge.Core.Entities;
+using RefactoringChallenge.Middlewares;
 
 namespace RefactoringChallenge
 {
@@ -39,6 +40,8 @@ namespace RefactoringChallenge
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 
