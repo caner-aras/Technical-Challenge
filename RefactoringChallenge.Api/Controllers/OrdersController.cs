@@ -4,7 +4,7 @@ using System.Linq;
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
-using RefactoringChallenge.Entities;
+using RefactoringChallenge.Core.Entities;
 
 namespace RefactoringChallenge.Controllers
 {

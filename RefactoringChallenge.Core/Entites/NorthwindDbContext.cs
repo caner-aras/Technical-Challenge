@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace RefactoringChallenge.Entities
+namespace RefactoringChallenge.Core.Entities
 {
     public partial class NorthwindDbContext : DbContext
     {
