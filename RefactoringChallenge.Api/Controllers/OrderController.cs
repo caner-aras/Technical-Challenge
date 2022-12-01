@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RefactoringChallenge.Core.Models.Requests;
 using RefactoringChallenge.Core.Models.Responses;
 using RefactoringChallenge.Core.Services.Interfaces;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace RefactoringChallenge.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class OrdersController : Controller

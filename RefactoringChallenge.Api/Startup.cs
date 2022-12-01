@@ -1,12 +1,15 @@
+using System.Text;
 using FluentValidation.AspNetCore;
 using Mapster;
 using MapsterMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using RefactoringChallenge.Core.Entities;
 using RefactoringChallenge.Core.Models.Exceptions;
 using RefactoringChallenge.Core.Repositories.Interfaces;
@@ -30,10 +33,29 @@ namespace RefactoringChallenge
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<NorthwindDbContext>(options => options.UseInMemoryDatabase("Technical-Challenge"));
-            
+
             // HACK:I could have used SQL Server
 
             //services.AddDbContext<NorthwindDbContext>(options => options.UseSqlServer("name=DefaultConnection"));
+
+
+           services.AddAuthentication(opt => {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = "https://localhost:5001",
+                        ValidAudience = "https://localhost:5001",
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("depotnet@123"))
+                    };
+             });
 
             services.AddSingleton(TypeAdapterConfig.GlobalSettings);
 
@@ -69,6 +91,9 @@ namespace RefactoringChallenge
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseRouting();
 
