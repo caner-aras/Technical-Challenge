@@ -25,7 +25,7 @@ namespace RefactoringChallenge.Controllers
             }
             if (user.UserName == "admin" && user.Password == "admin@123")
             {
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("depotnet@123"));
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("depotnet@123!!@123"));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                 var tokeOptions = new JwtSecurityToken(
                     issuer: "https://localhost:5001",

@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text;
 using FluentValidation.AspNetCore;
 using Mapster;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using RefactoringChallenge.Core.Entities;
 using RefactoringChallenge.Core.Models.Exceptions;
@@ -53,7 +55,7 @@ namespace RefactoringChallenge
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = "https://localhost:5001",
                         ValidAudience = "https://localhost:5001",
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("depotnet@123"))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("depotnet@123!!@123"))
                     };
              });
 
@@ -87,6 +89,9 @@ namespace RefactoringChallenge
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            IdentityModelEventSource.ShowPII = true;
 
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
