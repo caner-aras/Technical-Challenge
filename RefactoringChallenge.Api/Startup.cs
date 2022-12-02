@@ -65,6 +65,11 @@ namespace RefactoringChallenge
             services.AddScoped<IMapper, ServiceMapper>();
             services.AddScoped(typeof(IRepository<,>), typeof(RefactoringChallenge.Core.Repositories.Repository<,>));
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
+
+
             services
                 .AddControllers(options =>
                 {
